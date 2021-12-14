@@ -1,35 +1,35 @@
-function counterSum() {
+// parametri plus and minus 
+
+const plusBtnElem = document.getElementById("plus-btn");
+const minusBtnElem = document.getElementById("minus-btn");
+
+
+const addNumberToCounter = (symbol) => {
     let elem = document.getElementById('show-result');
-    let result = elem.innerText; 
-    let counter = document.getElementById('counter').value;
-    let checkText = checkInputField(counter);
+    let result = parseInt(document.getElementById('show-result').innerHTML);
+    let counterText = document.getElementById('counter').value;
+    let counter = parseInt(counterText);
+    let checkText = checkInputField(counterText);
 
     if(checkText) {
-        if(!(counter == "")) {
-            let sum = parseInt(result) + parseInt(counter);
-            elem.textContent= sum;
+        if(counterText != "") {
+            switch (symbol) {
+                case "plus":
+                    result+= counter;
+                    break;
+                case "minus":
+                        result-= counter;
+                    break;
+            }
+            elem.innerHTML=  result;
         } else {
             alert('You have not entered any values!');
         }
     } else {
         alert('Warning! You have entered a character or symbol!');
     }
-};
 
-function counterSub() {
-    let elem = document.getElementById('show-result');
-    let result = elem.innerText; 
-    let counter = document.getElementById('counter').value;
-    let checkText = checkInputField(counter);
-
-    if(checkText) {
-        let sub = parseInt(result) - parseInt(counter);
-        elem.textContent= sub;
-    } else {
-        alert('Warning! You have entered a character or symbol!');
-    }
-};
-
+}
 
 function checkInputField(checkString) {
     let result = true;
@@ -57,4 +57,6 @@ function checkInputField(checkString) {
     return result;
 }
 
+plusBtnElem.addEventListener("click", () => addNumberToCounter("plus"));
+minusBtnElem.addEventListener("click", () => addNumberToCounter("minus"));
 console.log("Script loaded!");
